@@ -1,0 +1,13 @@
+/.gradle/
+/build/
+/build/classes/java/main/
+/.idea/
+/out
+/release
+local.properties
+.DS_Store
+
+# Project exclude paths
+/ruleset/build/
+/ruleset/build/classes/kotlin/main/
+/ruleset/build/classes/kotlin/test/
