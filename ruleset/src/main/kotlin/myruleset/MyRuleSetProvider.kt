@@ -1,3 +1,5 @@
+package myruleset
+
 import com.pinterest.ktlint.cli.ruleset.core.api.RuleSetProviderV3
 import com.pinterest.ktlint.rule.engine.core.api.Rule
 import com.pinterest.ktlint.rule.engine.core.api.RuleProvider

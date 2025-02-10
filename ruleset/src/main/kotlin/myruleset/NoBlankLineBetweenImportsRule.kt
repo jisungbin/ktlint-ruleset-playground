@@ -1,3 +1,5 @@
+package myruleset
+
 import com.pinterest.ktlint.rule.engine.core.api.AutocorrectDecision
 import com.pinterest.ktlint.rule.engine.core.api.ElementType.IMPORT_LIST
 import com.pinterest.ktlint.rule.engine.core.api.Rule

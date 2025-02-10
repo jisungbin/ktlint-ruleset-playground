@@ -1,8 +1,10 @@
+package myruleset
+
 import com.pinterest.ktlint.rule.engine.core.api.Rule
 import com.pinterest.ktlint.rule.engine.core.api.RuleProvider
 import com.pinterest.ktlint.test.KtLintAssertThat
 import kotlin.reflect.full.createInstance
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class NoBlankLineBetweenImportsRuleTest {
   @Test fun test() {
