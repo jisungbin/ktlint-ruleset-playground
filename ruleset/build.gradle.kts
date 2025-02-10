@@ -10,10 +10,6 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-mavenPublishing {
-  configure(KotlinJvm(javadocJar = JavadocJar.None(), sourcesJar = false))
-}
-
 dependencies {
   implementation("com.pinterest.ktlint:ktlint-cli-ruleset-core:1.5.0")
   implementation("com.pinterest.ktlint:ktlint-rule-engine-core:1.5.0")
