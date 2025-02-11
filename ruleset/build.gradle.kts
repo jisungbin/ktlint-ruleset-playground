@@ -1,6 +1,3 @@
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinJvm
-
 plugins {
   kotlin("jvm")
   id("com.vanniktech.maven.publish") version "0.30.0"
@@ -8,6 +5,10 @@ plugins {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+kotlin {
+  jvmToolchain(19)
 }
 
 dependencies {
