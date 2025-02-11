@@ -25,16 +25,16 @@ class NoBlankLineBetweenImportsRule :
     if (node.elementType == IMPORT_LIST) {
       node.getChildren(WHITE_SPACE)
         .filter { it.text.contains("\n\n") }
-        .forEach { node ->
-          emit(node.startOffset, MESSAGE, true)
-            .ifAutocorrectAllowed { node.replaceWith(PsiWhiteSpaceImpl("\n")) }
+        .forEach { whitespace ->
+          emit(whitespace.startOffset, MESSAGE, true)
+            .ifAutocorrectAllowed { whitespace.replaceWith(PsiWhiteSpaceImpl("\n")) }
         }
       stopTraversalOfAST()
     }
   }
 
   companion object {
-    const val ID = "no-blank-line-between-imports-rule"
+    const val ID = "no-blank-line-between-imports"
     private const val MESSAGE = "There should be no blank line between imports"
   }
 }
