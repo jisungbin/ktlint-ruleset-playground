@@ -7,7 +7,7 @@ import com.pinterest.ktlint.rule.engine.core.api.RuleSetId
 
 class MyRuleSetProvider : RuleSetProviderV3(RuleSetId(RULESET_ID)) {
   override fun getRuleProviders(): Set<RuleProvider> =
-    setOf(RuleProvider { NoBlankLineBetweenImportsRule() })
+    setOf(RuleProvider { IdMustHaveNoDefaultRule() })
 
   companion object {
     const val RULESET_ID = "my-ruleset"
