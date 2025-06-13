@@ -7,5 +7,6 @@ allprojects {
     mavenCentral()
     gradlePluginPortal()
     google()
+    mavenLocal()
   }
 }
