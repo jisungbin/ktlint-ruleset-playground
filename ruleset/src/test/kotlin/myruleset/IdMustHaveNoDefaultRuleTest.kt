@@ -10,7 +10,7 @@ class IdMustHaveNoDefaultRuleTest {
   @Test fun test() {
     val assertion = assertRule<IdDefaultIsUuidRule>(
       """
-        package myruleset
+        package com.squareup.wire
         
         class Id(
           val name: String = "",
@@ -27,62 +27,72 @@ class IdMustHaveNoDefaultRuleTest {
   @Test fun test2() {
     val assertion = assertRule<IdDefaultIsUuidRule>(
       """
-        package myruleset
+        package com.squareup.wire
         
-        interface HasId
+        class Message<A, B>(val a: A, val b: B)
 
         class Id(
           val name: String = "",
           val id: String = "",
           val description: String = "",
           val type: String = "",
-        ) : HasId
+        ) : Message<Int, Int>(1, 2)
       """.trimIndent(),
     )
 
     assertion.isFormattedAs(
       """
-        package myruleset
+        package com.squareup.wire
         
-        interface HasId
+        class Message<A, B>(val a: A, val b: B)
 
         class Id(
           val name: String = "",
           val id: String = java.util.UUID.randomUUID().toString(),
           val description: String = "",
           val type: String = "",
-        ) : HasId
+        ) : Message<Int, Int>(1, 2)
       """.trimIndent(),
     )
   }
-//
-//  @Test fun test3() {
-//    val assertion = assertRule<IdMustHaveNoDefaultRule>(
-//      """
-//import kotlin.Unit
-//
-//import kotlin.String
-//      """.trimIndent(),
-//    )
-//
-//    assertion.isFormattedAs(
-//      """
-//import kotlin.Unit
-//import kotlin.String
-//      """.trimIndent(),
-//    )
-//  }
-//
-//  @Test fun test4() {
-//    val assertion = assertRule<IdMustHaveNoDefaultRule>(
-//      """
-//import kotlin.Unit
-//import kotlin.String
-//      """.trimIndent(),
-//    )
-//
-//    assertion.hasNoLintViolations()
-//  }
+
+  @Test fun test3() {
+    val assertion = assertRule<IdDefaultIsUuidRule>(
+      """
+        package com.squareup
+        
+        class Message<A, B>(val a: A, val b: B)
+
+        class Id(
+          val name: String = "",
+          val id: String = "",
+          val description: String = "",
+          val type: String = "",
+        ) : Message<Int, Int>(1, 2)
+      """.trimIndent(),
+    )
+
+    assertion.hasNoLintViolations()
+  }
+
+  @Test fun test4() {
+    val assertion = assertRule<IdDefaultIsUuidRule>(
+      """
+        package com.squareup.wire
+        
+        class Message<A, B>(val a: A, val b: B)
+
+        class Id(
+          val name: String = "",
+          val id: Int = "",
+          val description: String = "",
+          val type: String = "",
+        ) : Message<Int, Int>(1, 2)
+      """.trimIndent(),
+    )
+
+    assertion.hasNoLintViolations()
+  }
 }
 
 private inline fun <reified T : Rule> assertRule(code: String): KtLintAssertThat =
