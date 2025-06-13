@@ -18,7 +18,6 @@ import java.util.WeakHashMap
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.openapi.project.Project
 import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtPsiFactory
 import org.jetbrains.kotlin.psi.psiUtil.siblings
 
@@ -46,14 +45,7 @@ class IdDefaultIsUuidRule :
 
       val ownerClass = node.parent(CLASS)?.psi as? KtClass ?: return
       val superTypes = ownerClass.superTypeListEntries.ifEmpty { return }
-
-      if (
-        superTypes.any {
-          // [it.typeAsUserType.qualifier == null].. why??
-          it.text.startsWith("Message") &&
-            (it.containingFile as? KtFile)?.packageFqName?.asString() == "com.squareup.wire"
-        }
-      ) {
+      if (superTypes.any { it.text.startsWith("Message") }) {
         val project = node.psi.project
         val psiFactory = psiFactories.getOrPut(project) { KtPsiFactory(project, markGenerated = false) }
         val uuidExpression = psiFactory.createExpression("java.util.UUID.randomUUID().toString()")
