@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class IdMustHaveNoDefaultRuleTest {
   @Test fun test() {
-    val assertion = assertRule<IdMustHaveNoDefaultRule>(
+    val assertion = assertRule<IdDefaultIsUuidRule>(
       """
         package myruleset
         
@@ -25,7 +25,7 @@ class IdMustHaveNoDefaultRuleTest {
   }
 
   @Test fun test2() {
-    val assertion = assertRule<IdMustHaveNoDefaultRule>(
+    val assertion = assertRule<IdDefaultIsUuidRule>(
       """
         package myruleset
         
@@ -48,7 +48,7 @@ class IdMustHaveNoDefaultRuleTest {
 
         class Id(
           val name: String = "",
-          val id: String,
+          val id: String = java.util.UUID.randomUUID().toString(),
           val description: String = "",
           val type: String = "",
         ) : HasId
